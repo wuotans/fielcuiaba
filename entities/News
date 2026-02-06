@@ -1,0 +1,47 @@
+{
+  "name": "News",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "T\u00edtulo da not\u00edcia"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Resumo da not\u00edcia"
+    },
+    "content": {
+      "type": "string",
+      "description": "Conte\u00fado completo da not\u00edcia"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "URL da imagem de capa"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "jogo",
+        "contratacao",
+        "bastidores",
+        "fiel_cuiaba",
+        "geral"
+      ],
+      "description": "Categoria da not\u00edcia"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Not\u00edcia em destaque"
+    },
+    "published": {
+      "type": "boolean",
+      "default": true,
+      "description": "Not\u00edcia publicada"
+    }
+  },
+  "required": [
+    "title",
+    "content"
+  ]
+}

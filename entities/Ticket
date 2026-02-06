@@ -1,0 +1,62 @@
+{
+  "name": "Ticket",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "ID do evento"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "Email do comprador"
+    },
+    "user_name": {
+      "type": "string",
+      "description": "Nome do comprador"
+    },
+    "quantity": {
+      "type": "number",
+      "default": 1,
+      "description": "Quantidade de ingressos"
+    },
+    "total_price": {
+      "type": "number",
+      "description": "Valor total pago"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "pix",
+        "cartao"
+      ],
+      "description": "M\u00e9todo de pagamento"
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "pendente",
+        "pago",
+        "cancelado"
+      ],
+      "default": "pendente"
+    },
+    "ticket_code": {
+      "type": "string",
+      "description": "C\u00f3digo \u00fanico do ingresso"
+    },
+    "eligible_for_raffle": {
+      "type": "boolean",
+      "default": false,
+      "description": "Eleg\u00edvel para sorteio"
+    },
+    "purchase_order": {
+      "type": "number",
+      "description": "Ordem de compra no evento"
+    }
+  },
+  "required": [
+    "event_id",
+    "user_email",
+    "total_price"
+  ]
+}
