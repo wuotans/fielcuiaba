@@ -1,12 +1,12 @@
 import React from 'react';
-import { base44 } from '@/api/base44Client';
+import { base44 } from '@/api/localDatabase';
 import { useQuery } from '@tanstack/react-query';
 import HeroSection from '@/components/home/HeroSection';
 import NewsSection from '@/components/home/NewsSection';
 import EventsSection from '@/components/home/EventsSection';
 import GalleryPreview from '@/components/home/GalleryPreview';
-import InstagramFeed from '@/components/home/InstagramFeed';
 import RaffleSection from '@/components/home/RaffleSection';
+import InstagramFeed from '@/components/home/InstagramFeed';
 
 export default function Home() {
     const { data: news, isLoading: loadingNews } = useQuery({

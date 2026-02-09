@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { createPageUrl } from "@/utils";
 import { ArrowRight, Image } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -32,7 +31,7 @@ export default function GalleryPreview({ photos, isLoading }) {
                         </h2>
                         <p className="text-gray-500">Momentos inesquecíveis da Fiel Cuiabá</p>
                     </div>
-                    <Link to={createPageUrl("Gallery")} className="text-white hover:text-gray-300 flex items-center gap-2 font-medium">
+                    <Link to="/gallery" className="text-white hover:text-gray-300 flex items-center gap-2 font-medium">
                         Ver todas <ArrowRight className="w-4 h-4" />
                     </Link>
                 </div>
@@ -50,7 +49,7 @@ export default function GalleryPreview({ photos, isLoading }) {
                                     index === 0 ? 'md:col-span-2 md:row-span-2' : ''
                                 }`}
                             >
-                                <div className={`${index === 0 ? 'aspect-square' : 'aspect-square'}`}>
+                                <div className="aspect-square">
                                     <img 
                                         src={photo.image_url} 
                                         alt={photo.title || "Foto da Fiel Cuiabá"}

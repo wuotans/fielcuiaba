@@ -1,82 +1,39 @@
-import { Toaster } from "@/components/ui/toaster"
-import { QueryClientProvider } from '@tanstack/react-query'
-import { queryClientInstance } from '@/lib/query-client'
-import NavigationTracker from '@/lib/NavigationTracker'
-import { pagesConfig } from './pages.config'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import PageNotFound from './lib/PageNotFound';
-import { AuthProvider, useAuth } from '@/lib/AuthContext';
-import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import { Routes, Route } from 'react-router-dom'
+import Layout from './Layout'
+import Home from './pages/Home'
+import News from './pages/News'
+import NewsDetail from './pages/NewsDetail'
+import Events from './pages/Events'
+import EventDetail from './pages/EventDetail'
+import Gallery from './pages/Gallery'
+import Raffles from './pages/Raffles'
+import MyTickets from './pages/MyTickets'
+import AdminDashboard from './pages/AdminDashboard'
+import AdminNews from './pages/AdminNews'
+import AdminEvents from './pages/AdminEvents'
+import AdminPhotos from './pages/AdminPhotos'
+import AdminRaffles from './pages/AdminRaffles'
+import AdminTickets from './pages/AdminTickets'
+import AdminReports from './pages/AdminReports'
 
-const { Pages, Layout, mainPage } = pagesConfig;
-const mainPageKey = mainPage ?? Object.keys(Pages)[0];
-const MainPage = mainPageKey ? Pages[mainPageKey] : <></>;
-
-const LayoutWrapper = ({ children, currentPageName }) => Layout ?
-  <Layout currentPageName={currentPageName}>{children}</Layout>
-  : <>{children}</>;
-
-const AuthenticatedApp = () => {
-  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
-
-  // Show loading spinner while checking app public settings or auth
-  if (isLoadingPublicSettings || isLoadingAuth) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-
-  // Handle authentication errors
-  if (authError) {
-    if (authError.type === 'user_not_registered') {
-      return <UserNotRegisteredError />;
-    } else if (authError.type === 'auth_required') {
-      // Redirect to login automatically
-      navigateToLogin();
-      return null;
-    }
-  }
-
-  // Render the main app
+export default function App() {
   return (
     <Routes>
-      <Route path="/" element={
-        <LayoutWrapper currentPageName={mainPageKey}>
-          <MainPage />
-        </LayoutWrapper>
-      } />
-      {Object.entries(Pages).map(([path, Page]) => (
-        <Route
-          key={path}
-          path={`/${path}`}
-          element={
-            <LayoutWrapper currentPageName={path}>
-              <Page />
-            </LayoutWrapper>
-          }
-        />
-      ))}
-      <Route path="*" element={<PageNotFound />} />
+      <Route path="/" element={<Layout currentPageName="Home"><Home /></Layout>} />
+      <Route path="/news" element={<Layout currentPageName="News"><News /></Layout>} />
+      <Route path="/news/:id" element={<Layout currentPageName="NewsDetail"><NewsDetail /></Layout>} />
+      <Route path="/events" element={<Layout currentPageName="Events"><Events /></Layout>} />
+      <Route path="/events/:id" element={<Layout currentPageName="EventDetail"><EventDetail /></Layout>} />
+      <Route path="/gallery" element={<Layout currentPageName="Gallery"><Gallery /></Layout>} />
+      <Route path="/raffles" element={<Layout currentPageName="Raffles"><Raffles /></Layout>} />
+      <Route path="/my-tickets" element={<Layout currentPageName="MyTickets"><MyTickets /></Layout>} />
+      <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/admin/news" element={<AdminNews />} />
+      <Route path="/admin/events" element={<AdminEvents />} />
+      <Route path="/admin/photos" element={<AdminPhotos />} />
+      <Route path="/admin/raffles" element={<AdminRaffles />} />
+      <Route path="/admin/tickets" element={<AdminTickets />} />
+      <Route path="/admin/reports" element={<AdminReports />} />
     </Routes>
-  );
-};
-
-
-function App() {
-
-  return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClientInstance}>
-        <Router>
-          <NavigationTracker />
-          <AuthenticatedApp />
-        </Router>
-        <Toaster />
-      </QueryClientProvider>
-    </AuthProvider>
   )
 }
-
-export default App

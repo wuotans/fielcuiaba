@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { createPageUrl } from "@/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, MapPin, Users, Ticket, ArrowRight } from "lucide-react";
+import { Calendar, MapPin, Ticket, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -29,7 +28,6 @@ export default function EventsSection({ events, isLoading }) {
 
     return (
         <section className="py-20 bg-black relative overflow-hidden">
-            {/* Background Decoration */}
             <div className="absolute inset-0 opacity-5">
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl" />
                 <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-white rounded-full blur-3xl" />
@@ -43,7 +41,7 @@ export default function EventsSection({ events, isLoading }) {
                         </h2>
                         <p className="text-gray-500">Garanta seu ingresso e participe!</p>
                     </div>
-                    <Link to={createPageUrl("Events")} className="text-white hover:text-gray-300 flex items-center gap-2 font-medium">
+                    <Link to="/events" className="text-white hover:text-gray-300 flex items-center gap-2 font-medium">
                         Ver todos <ArrowRight className="w-4 h-4" />
                     </Link>
                 </div>
@@ -71,7 +69,6 @@ export default function EventsSection({ events, isLoading }) {
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent" />
                                             
-                                            {/* Date Badge */}
                                             <div className="absolute top-4 left-4 bg-white text-black rounded-lg p-2 text-center min-w-[60px]">
                                                 <div className="text-2xl font-bold leading-none">
                                                     {format(new Date(event.date), "dd")}
@@ -104,7 +101,6 @@ export default function EventsSection({ events, isLoading }) {
                                                 </div>
                                             </div>
 
-                                            {/* Progress Bar */}
                                             <div className="mb-4">
                                                 <div className="flex justify-between text-sm mb-1">
                                                     <span className="text-gray-500">Ingressos vendidos</span>
@@ -125,7 +121,7 @@ export default function EventsSection({ events, isLoading }) {
                                                     </div>
                                                     <div className="text-xs text-gray-500">por ingresso</div>
                                                 </div>
-                                                <Link to={createPageUrl("EventDetail") + `?id=${event.id}`}>
+                                                <Link to={`/events/${event.id}`}>
                                                     <Button className="bg-white text-black hover:bg-gray-200 rounded-full">
                                                         <Ticket className="w-4 h-4 mr-2" />
                                                         Comprar
